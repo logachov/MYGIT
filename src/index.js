@@ -23,6 +23,15 @@ function currentData(anyDate) {
 let setDate = document.querySelector(".currentTime");
 setDate.innerHTML = currentData(now);
 
+let favCities = document.querySelectorAll(".favorites");
+let curCity = document.querySelector("span.currentCity");
+
+Array.from(favCities).forEach(function (city) {
+  city.addEventListener("click", function (e) {
+    curCity.innerHTML = e.target.id;
+  });
+});
+
 let tempInF = document.querySelector("span.TempF");
 
 let searchCity = document.querySelector(".search");
@@ -67,8 +76,6 @@ function setPlace(event) {
   function myPosition(position) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
-    console.log(lat);
-    console.log(lon);
     let apiKey = "c110ea55f9fc67bbe11e8618e106eff8";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(showData);
